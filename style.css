@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+video {
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .viewport-header {
+    position: relative;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box{
+      width: 100%;
+      height: 600px;
+      background: url('assets/images/border.png') no-repeat;
+  }
+
+  .inner-box{
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      color: black;
+      font-family: 'Special Elite', cursive;
+      letter-spacing: 2px;
+  }
+  .quotes{
+/*     border: solid 2px #c7c7c7;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; */
+  }
+  .inner-box img{
+      width: 30%;
+  }

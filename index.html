@@ -18,17 +18,24 @@
     <header class="viewport-header">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="box px-5">
-                        <div class="inner-box d-flex align-items-center justify-content-center px-5">
-                            <div>
+                <div class="col-md-9">
+                    <div class="wrapper bg-white m-auto mb-5">
 
-                                <h1 class="quotes">
-                                    You will face many defeates in life, but never let yourself be defeated.
-                                </h1>
-                                <img src="assets/images/sad_girl.jpg" alt="sad girl" />
+                        <div class="box px-5">
+                            <div class="inner-box d-flex align-items-center justify-content-center px-5">
+                                <div>
+
+                                    <h2 class="quotes mb-5">
+                                        You will face many defeates in life, but never let yourself be defeated.
+                                    </h2>
+                                    <img src="assets/images/sad_girl.jpg" alt="sad girl" />
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center pt-3">
+                        <h4 class="me-3">Change next quotes in: </h4>
+                        <h2 id="timer" class="text-primary"></h2>
                     </div>
                 </div>
             </div>
@@ -39,6 +46,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
+    <script src="assets/js/moment.js"></script>
+
+    <script>
+        const timeSpace = 6
+        const timeFrame = "minutes"
+        const dateTime = new Date()
+
+        if (!localStorage.getItem('dateTime'))
+            localStorage.setItem('dateTime', dateTime)
+        const oldTime = localStorage.getItem('dateTime')
+        let timer = moment(oldTime)
+            .add(timeSpace, timeFrame)
+        var now = moment(new Date());
+        var end = moment(timer);
+        var duration = moment.duration(end.diff(now));
+
+        diff = `${duration._data.hours}:${duration._data.minutes}:${duration._data.seconds}`
+        const timeInterval = setInterval(() => {
+            if (Date.parse(new Date()) > Date.parse(timer)) {
+                timer = moment(new Date())
+                    .add(timeSpace, timeFrame)
+                localStorage.setItem('dateTime', new Date())
+                var now = moment(new Date());
+                var end = moment(timer);
+                var duration = moment.duration(end.diff(now));
+
+                diff = `${duration._data.hours}:${duration._data.minutes}:${duration._data.seconds}`
+            } else {
+                var startTime = moment(
+                    diff,
+                    "HH:mm:ss"
+                );
+                diff = moment(startTime)
+                    .subtract(1, "seconds")
+                    .format("HH:mm:ss");
+                document.getElementById("timer").innerHTML = startTime._i
+            }
+        }, 1000);
+
+
+    </script>
 </body>
 
 </html>

@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <video playsinline autoplay muted loop poster="polina.jpg" id="bgvid">
-        <source src="assets/videos/Beach Background GIF by zoremine.mp4" type="video/mp4">
+    <video playsinline autoplay muted loop id="vid">
+        <source src="assets/videos/1.mp4" type="video/mp4">
     </video>
     <header class="viewport-header">
         <div class="container">
@@ -23,12 +23,19 @@
 
                         <div class="box px-5">
                             <div class="inner-box d-flex align-items-center justify-content-center px-5">
-                                <div>
+                                <div id="q1">
 
                                     <h2 class="quotes mb-5">
                                         You will face many defeates in life, but never let yourself be defeated.
                                     </h2>
                                     <img src="assets/images/sad_girl.jpg" alt="sad girl" />
+                                </div>
+                                <div id="q2">
+
+                                    <h2 class="quotes mb-5">
+                                        Your quotes
+                                    </h2>
+                                    <img src="assets/images/pexels-photo-1680172.jpeg" alt="sad girl" />
                                 </div>
                             </div>
                         </div>
@@ -49,8 +56,44 @@
     <script src="assets/js/moment.js"></script>
 
     <script>
-        const timeSpace = 6
+        //configuration
+        const timeSpace = 1
         const timeFrame = "minutes"
+        const quotesMin = 1
+        const quotesMax = 2
+
+
+
+        for (var i = 0; i < 2; i++) {
+            document.getElementById(`q${i + 1}`).style.display = "none"
+        }
+        function getRandomExcept(min, max, except) {
+            except.sort(function (a, b) {
+                return a - b;
+            });
+            var random = Math.floor(Math.random() * (max - min + 1 - except.length)) + min;
+            var i;
+            for (i = 0; i < except.length; i++) {
+                if (except[i] > random) {
+                    break;
+                }
+                random++;
+            }
+            return random;
+        }
+
+
+        const rndInt = getRandomExcept(quotesMin, quotesMax, [])
+
+        document.getElementById(`q${rndInt}`).style.display = "block"
+
+
+        let currentQuotes = rndInt
+
+
+
+        //timer
+
         const dateTime = new Date()
 
         if (!localStorage.getItem('dateTime'))
@@ -73,6 +116,11 @@
                 var duration = moment.duration(end.diff(now));
 
                 diff = `${duration._data.hours}:${duration._data.minutes}:${duration._data.seconds}`
+
+                const id = getRandomExcept(quotesMin, quotesMax, [currentQuotes])
+                document.getElementById(`q${currentQuotes}`).style.display = "none"
+                document.getElementById(`q${id}`).style.display = "block"
+                currentQuotes = id
             } else {
                 var startTime = moment(
                     diff,

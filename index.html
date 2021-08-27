@@ -41,8 +41,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center pt-3">
-                        <h4 class="me-3">Change next quotes in: </h4>
-                        <h2 id="timer" class="text-primary"></h2>
+                        <h2 id="timer" class="text-white bg-success px-3 py-2"></h2>
                     </div>
                 </div>
             </div>
@@ -61,33 +60,20 @@
         const timeFrame = "minutes"
         const quotesMin = 1
         const quotesMax = 2
+        const gifMin = 1
+        const gifMax = 2
 
+        //for random gif
+        const rndGif = getRandomExcept(gifMin, gifMax, [])
+        let currentGif = rndGif
+        document.getElementById('vid').src = `assets/videos/${rndGif}.mp4`
 
-
+        //for random quoutes
         for (var i = 0; i < 2; i++) {
             document.getElementById(`q${i + 1}`).style.display = "none"
         }
-        function getRandomExcept(min, max, except) {
-            except.sort(function (a, b) {
-                return a - b;
-            });
-            var random = Math.floor(Math.random() * (max - min + 1 - except.length)) + min;
-            var i;
-            for (i = 0; i < except.length; i++) {
-                if (except[i] > random) {
-                    break;
-                }
-                random++;
-            }
-            return random;
-        }
-
-
         const rndInt = getRandomExcept(quotesMin, quotesMax, [])
-
         document.getElementById(`q${rndInt}`).style.display = "block"
-
-
         let currentQuotes = rndInt
 
 
@@ -121,6 +107,9 @@
                 document.getElementById(`q${currentQuotes}`).style.display = "none"
                 document.getElementById(`q${id}`).style.display = "block"
                 currentQuotes = id
+
+                const rndGif = getRandomExcept(gifMin, gifMax, [currentGif])
+                document.getElementById('vid').src = `assets/videos/${rndGif}.mp4`
             } else {
                 var startTime = moment(
                     diff,
@@ -133,6 +122,20 @@
             }
         }, 1000);
 
+        function getRandomExcept(min, max, except) {
+            except.sort(function (a, b) {
+                return a - b;
+            });
+            var random = Math.floor(Math.random() * (max - min + 1 - except.length)) + min;
+            var i;
+            for (i = 0; i < except.length; i++) {
+                if (except[i] > random) {
+                    break;
+                }
+                random++;
+            }
+            return random;
+        }
 
     </script>
 </body>

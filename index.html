@@ -108,8 +108,9 @@
                 document.getElementById(`q${id}`).style.display = "block"
                 currentQuotes = id
 
-                const rndGif = getRandomExcept(gifMin, gifMax, [currentGif])
-                document.getElementById('vid').src = `assets/videos/${rndGif}.mp4`
+                const rndId = getRandomExcept(gifMin, gifMax, [currentGif])
+                document.getElementById('vid').src = `assets/videos/${rndId}.mp4`
+                currentGif = rndId
             } else {
                 var startTime = moment(
                     diff,
